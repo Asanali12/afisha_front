@@ -1,9 +1,8 @@
 module.exports = {
     devServer: {
-        proxy: 'http://192.168.1.132:8080',
+        proxy: 'http://ec2-3-17-146-147.us-east-2.compute.amazonaws.com:8080/',
         headers: {
-            'Access-Control-Allow-Origin': "*" 
+            'Access-Control-Allow-Origin': '*'
         }
-    },
-    publicPath: "/"
+    }
   }

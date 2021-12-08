@@ -1,6 +1,6 @@
 <template>
-<div class="card" style="width: 25rem; border-radius: 1.5rem; position:relative; box-shadow: 2px 3px 2px #999999; border: 0; height: 450px; overflow: clip">
-    <img class="card-img-top" :src="require('@/assets/poster2.jpg')" alt="Card image cap" style="border-radius: 1.5rem; object-fit: none; height: 100%">
+<div class="card" style="width: 25rem; border-radius: 1.5rem; position:relative; box-shadow: 2px 3px 2px #999999; border: 0; height: 450px; overflow: hidden">
+    <img class="card-img-top" :src="poster" alt="Card image cap" style="border-radius: 1.5rem; object-fit: none; height: 100%">
     <div class="card-body card-content container-fluid">
         <div class="row">
             <div class="col">

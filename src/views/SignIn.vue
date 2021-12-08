@@ -14,14 +14,14 @@
       <div class="from-div">
         <form>
             <div class="form-group input-div">
-                <input type="text" class="form-control form-text-field" id="login" aria-describedby="emailHelp" placeholder="login">
+                <input type="text" class="form-control form-text-field" id="login" aria-describedby="emailHelp" placeholder="login" v-model="form.email">
             </div>
             <div class="form-group input-div">
-                <input type="password" class="form-control form-text-field" id="password" placeholder="password">
+                <input type="password" class="form-control form-text-field" id="password" placeholder="password" v-model="form.password">
             </div>
             <div class="row">
                 <div class="col">
-                    <button type="submit" class="btn btn-success sign-in-button">Sign In</button>
+                    <button type="button" class="btn btn-success sign-in-button" @click="submit">Sign In</button>
                 </div>
                 <div class="col d-flex flex-row-reverse">
                     <router-link to="sign-up" class="no-account-link">Don't have an account</router-link>
@@ -42,19 +42,28 @@ export default {
   name: "SignIn",
   data () {
     return {
-      
+      form:{
+        email:"",
+        password:""
+      }
     }
   },
   components:{
     Header
   },
   mounted () {
-    /*axios
-      .get(
-        "http://192.168.1.132:8080/events/get_all",
-      ).then( (resp) => {
-        this.events = resp.data
-      })*/
+    
+  },
+  methods:{
+    async submit() {
+      try {
+        await this.$store.dispatch('LogIn', this.form)
+        this.$router.push("/")
+        this.showError = false
+      } catch (error) {
+        this.showError = true
+      }
+    },
   }
 };
 </script>

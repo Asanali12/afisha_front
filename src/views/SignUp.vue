@@ -16,27 +16,30 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group input-div">
-                        <input type="text" class="form-control form-text-field" id="name" aria-describedby="emailHelp" placeholder="name">
+                        <input type="text" class="form-control form-text-field" id="name" aria-describedby="emailHelp" placeholder="name" v-model="form.firstName">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group input-div">
-                        <input type="text" class="form-control form-text-field" id="surname" aria-describedby="emailHelp" placeholder="surname">
+                        <input type="text" class="form-control form-text-field" id="surname" aria-describedby="emailHelp" placeholder="surname" v-model="form.secondName">
                     </div>
                 </div>
             </div>
             <div class="form-group input-div">
-                <input type="text" class="form-control form-text-field" id="login" aria-describedby="emailHelp" placeholder="login">
+                <input type="text" class="form-control form-text-field" id="login" aria-describedby="emailHelp" placeholder="email" v-model="form.email">
             </div>
             <div class="form-group input-div">
-                <input type="password" class="form-control form-text-field" id="password" placeholder="password">
+                <input type="password" class="form-control form-text-field" id="password" placeholder="password" v-model="form.password">
             </div>
             <div class="form-group input-div">
-                <input type="password" class="form-control form-text-field" id="passwordRepeat" placeholder="repeat password">
+                <input type="password" class="form-control form-text-field" id="passwordRepeat" placeholder="repeat password" v-model="passwordRepeat">
+            </div>
+            <div class="alert alert-danger" role="alert" v-if="!passwordsMatch">
+              Please provide matching passwords
             </div>
             <div class="row">
                 <div class="col">
-                    <button type="submit" class="btn btn-success sign-in-button">Sign In</button>
+                    <button type="button" class="btn btn-success sign-in-button" @click="submit">Sign Up</button>
                 </div>
                 <div class="col d-flex flex-row-reverse">
                     <router-link to="sign-in" class="no-account-link">Already have an account</router-link>
@@ -50,9 +53,8 @@
 </template>
 
 <script>
-//import axios from "axios";
 import Header from "@/components/Header.vue";
-import { mapActions } from "vuex";
+//import axios from 'axios';
 
 
 export default {
@@ -60,35 +62,41 @@ export default {
   data () {
     return {
       form: {
-        username: "",
-        full_name: "",
-        password: "",
+        firstName:"",
+        secondName:"",
+        email:"",
+        password:"",
+        userEvents : {
+          events : []
+        },
+        role: "ADMIN"
       },
+      passwordRepeat: "",
       showError: false
     }
   },
   components:{
     Header
   },
-  mounted () {
-    /*axios
-      .get(
-        "http://192.168.1.132:8080/events/get_all",
-      ).then( (resp) => {
-        this.events = resp.data
-      })*/
+  async mounted () {
+    
   },
   methods: {
-    ...mapActions(["Register"]),
+    
     async submit() {
       try {
-        await this.Register(this.form);
-        this.$router.push("/posts");
+        await this.$store.dispatch('SignUp', this.form)
+        this.$router.push("/")
         this.showError = false
       } catch (error) {
         this.showError = true
       }
     },
+  },
+  computed: {
+    passwordsMatch () {
+      return this.form.password === this.passwordRepeat
+    }
   }
 };
 </script>

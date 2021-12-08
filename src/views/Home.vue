@@ -11,19 +11,19 @@
       </div>
     </div>
     <div class="search-bar-div">
-      <SearchBar v-model:text="searchString" @input="filteredItems"/>
+      <SearchBar v-model:text="searchString"/>
     </div>
   </div>
   <div class="container event-cards">
     <div class="event-card-wrapper" v-for="event in filteredEvents" :key="event.id">
-      <event-card :posterUrl="event.posterUrl" :name="event.title" :date="event.date" :id="event.id"/>
+      <event-card :posterUrl="event.posterUrl" :name="event.title" :date="event.date" :id="event.id" />
     </div>
   </div>
 </div>
 </template>
 
 <script>
-//import axios from "axios";
+import axios from "axios";
 import Header from "@/components/Header.vue";
 import SearchBar from "@/components/SearchBar.vue";
 import EventCard from "@/components/EventCard.vue";
@@ -35,52 +35,7 @@ export default {
       searchString: "",
       //filteredEvents: [],
       events : [
-        {
-          "id": 0,
-          "title": "Super bdsm event",
-          "ageRestriction": 18,
-          "description": "Успей сделать МТС проект не порвав сраку",
-          "date": "28.11.2021-04.12.2021",
-          "numberParticipants": 10,
-          "posterUrl": "test"
-        },
-        {
-          "id": 1,
-          "title": "Super bdsm event",
-          "ageRestriction": 18,
-          "description": "Успей сделать МТС проект не порвав сраку",
-          "date": "28.11.2021-04.12.2021",
-          "numberParticipants": 10,
-          "posterUrl": "test"
-        },
-        {
-          "id": 2,
-          "title": "Super bdsm event",
-          "ageRestriction": 18,
-          "description": "Успей сделать МТС проект не порвав сраку",
-          "date": "28.11.2021-04.12.2021",
-          "numberParticipants": 10,
-          "posterUrl": "test"
-        },
-        {
-          "id": 3,
-          "title": "Super bdsm event",
-          "ageRestriction": 18,
-          "description": "Успей сделать МТС проект не порвав сраку",
-          "date": "28.11.2021-04.12.2021",
-          "numberParticipants": 10,
-          "posterUrl": "test"
-        },
-        {
-          "id": 4,
-          "title": "Super bdsm event",
-          "ageRestriction": 18,
-          "description": "Успей сделать МТС проект не порвав сраку",
-          "date": "28.11.2021-04.12.2021",
-          "numberParticipants": 10,
-          "posterUrl": "test"
-        },
-      ]
+      ],
     }
   },
   components:{
@@ -88,19 +43,15 @@ export default {
     SearchBar,
     EventCard
   },
-  mounted () {
-    /*axios
+  async mounted () {
+    await axios
       .get(
-        "http://192.168.1.132:8080/events/get_all",
+        "/events/get_approved",
       ).then( (resp) => {
         this.events = resp.data
-      })*/
-      //this.filteredEvents = this.events
+      })
   },
   methods:{
-    filteredItems () {
-      console.log(this.searchString)
-    }
   },
   computed:{
     filteredEvents () {
