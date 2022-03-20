@@ -88,27 +88,18 @@ export default {
   data () {
     return {
       events : [
-        /*{
-          "id": 0,
-          "title": "Super bdsm event",
-          "ageRestriction": 18,
-          "description": "Успей сделать МТС проект не порвав сраку",
-          "date": "28.11.2021-04.12.2021",
-          "numberParticipants": 10,
-          "posterUrl": "test"
-        }*/
       ],
       appliedForOrg: null,
       role: "",
       adminUserSubmissions: [],
       adminEventSubmissions: [{
           "id": 0,
-          "title": "Super bdsm event",
+          "title": "-",
           "ageRestriction": 18,
-          "description": "Успей сделать МТС проект не порвав сраку",
+          "description": "-",
           "date": "28.11.2021-04.12.2021",
           "numberParticipants": 10,
-          "posterUrl": "test"
+          "posterUrl": ""
       }],
       organizerEvents: []
     }
@@ -227,12 +218,12 @@ export default {
   computed:{
     textRole () {
       if (this.$store.getters.getRole === "ROLE_USER"){
-        //return "user"
-        return "admin"
+        return "user"
+        //return "admin"
       }else{
         if (this.$store.getters.getRole === "ORGANIZER") {
-          //return "organizer"
-          return "admin"
+          return "organizer"
+          //return "admin"
         }else{
           if (this.$store.getters.getRole === "ADMIN") {
             return "admin"

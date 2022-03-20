@@ -78,9 +78,7 @@ export default {
         })
         this.currentParticipants = participants.length
       })
-    //this.role = this.$store.getters.getRole
-    this.role = "ADMIN"
-    console.log(this.role)
+    this.role = this.$store.getters.getRole
   },
   methods:{
     async approve () {
@@ -104,7 +102,6 @@ export default {
       await axios.post(
         "/users/join/"+email+"/"+this.event.id,{}
       ).then( (resp) => {
-        console.log(resp)
         this.joinDisabled = true
       })
     },

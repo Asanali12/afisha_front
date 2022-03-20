@@ -5,7 +5,6 @@ import SignIn from '@/views/SignIn'
 import SignUp from '@/views/SignUp'
 import Event from '@/views/Event'
 import CreateEvent from '@/views/CreateEvent'
-//import store from '@/store/index.js';
 
 const routes = [
     {
